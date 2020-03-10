@@ -1,0 +1,64 @@
+<script src="shri-async-hw.js"></script>
+
+<script>
+    const {
+        AsyncArray,
+        add,
+        subtract,
+        multiply,
+        divide
+    } = Homework;
+
+    const a = new AsyncArray([1, 2, 3]);
+
+    console.log('добавление элемента');
+    a.push(4, () => { 
+        console.log('добавление элемента выполнено');
+        a.print();
+    });
+    a.print();
+
+    console.log('присваивание элемента по индексу');
+    a.set(2, 999, () => { 
+        console.log('присваивание элемента по индексу выполнено');
+        a.print();
+    });
+    a.print();
+
+    console.log('получение элемента по индексу');
+    a.get(0, (result) => { 
+        console.log('получение элемента по индексу выполнено');
+        console.log('результат', result);
+        a.print();
+    });
+    a.print();
+
+    console.log('получение последнего элемента');
+    a.pop((result) => { 
+        console.log('получение последнего элемента выполнено');
+        console.log('результат', result);
+        a.print();
+    });
+    a.print();
+
+    console.log('получение длины массива');
+    a.length((result) => { 
+        console.log('получение длины массива выполнено');
+        console.log('результат', result);
+        a.print();
+    });
+    a.print();
+
+    console.log('сложение 5 + 2');
+    add(5, 2, (result) => console.log('результат сложения', result));
+
+    console.log('вычитание 11 - 7');
+    subtract(11, 7, (result) => console.log('результат вычитания', result));
+
+    console.log('умножение 6 * 7');
+    multiply(6, 7, (result) => console.log('результат умножения', result));
+
+    console.log('деление 13 / 7');
+    divide(13, 7, (result) => console.log('результат деления', result));
+
+</script>
