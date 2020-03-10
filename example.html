@@ -1,3 +1,5 @@
+Посмотрите код страницы и вывод в консоль браузера.
+
 <script src="shri-async-hw.js"></script>
 
 <script>
@@ -6,7 +8,8 @@
         add,
         subtract,
         multiply,
-        divide
+        divide,
+        mod
     } = Homework;
 
     const a = new AsyncArray([1, 2, 3]);
@@ -60,5 +63,8 @@
 
     console.log('деление 13 / 7');
     divide(13, 7, (result) => console.log('результат деления', result));
+
+    console.log('остаток от деления 17 % 7');
+    mod(17, 7, (result) => console.log('получен остаток от деления', result));
 
 </script>

@@ -27,13 +27,15 @@
     const subtract = (a, b, cb) => _wrap(() => a - b, cb);
     const multiply = (a, b, cb) => _wrap(() => a * b, cb);
     const divide = (a, b, cb) => _wrap(() => a / b, cb);
+    const mod = (a, b, cb) => _wrap(() => a % b, cb);
 
     window.Homework = {
         AsyncArray,
         add,
         subtract,
         multiply,
-        divide
+        divide,
+        mod
     };
 
     Object.freeze(window.Homework);
