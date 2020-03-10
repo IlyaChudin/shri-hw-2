@@ -31,7 +31,7 @@ function(array: AsyncArray, cb: (result: Number) => void) {
 
 ### Вариант 3
 
-Реализовать [сложение векторов](http://www.math24.ru/сложение-и-вычитание-векторов.html).
+Реализовать [сложение n-мерных векторов](http://www.math24.ru/сложение-и-вычитание-векторов.html).
 
 ```ts
 function(v1: AsyncArray, v2: AsyncArray, cb: (result: AsyncArray) => void) {
