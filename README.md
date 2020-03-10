@@ -101,6 +101,7 @@ function map(
 function reduce(
     array: AsyncArray,
     fn: (acc: any, cur: any, idx: Number, src: AsyncArray) => any,
+    initialValue: any,
     cb: (result: any) => void) {
 
 }
