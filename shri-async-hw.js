@@ -29,13 +29,22 @@
     const divide = (a, b, cb) => _wrap(() => a / b, cb);
     const mod = (a, b, cb) => _wrap(() => a % b, cb);
 
+    const less = (a, b, cb) => _wrap(() => a < b, cb);
+    const equal = (a, b, cb) => _wrap(() => a == b, cb);
+    const lessOrEqual = (a, b, cb) => _wrap(() => a <= b, cb);
+    const sqrt = (x, cb) => _wrap(() => Math.sqrt(x), cb);
+
     window.Homework = {
         AsyncArray,
         add,
         subtract,
         multiply,
         divide,
-        mod
+        mod,
+        less,
+        equal,
+        lessOrEqual,
+        sqrt
     };
 
     Object.freeze(window.Homework);

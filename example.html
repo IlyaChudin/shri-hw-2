@@ -9,7 +9,11 @@
         subtract,
         multiply,
         divide,
-        mod
+        mod,
+        less,
+        equal,
+        lessOrEqual,
+        sqrt
     } = Homework;
 
     const a = new AsyncArray([1, 2, 3]);
@@ -52,19 +56,31 @@
     });
     a.print();
 
-    console.log('сложение 5 + 2');
+    console.log('сложение: 5 + 2');
     add(5, 2, (result) => console.log('результат сложения', result));
 
-    console.log('вычитание 11 - 7');
+    console.log('вычитание: 11 - 7');
     subtract(11, 7, (result) => console.log('результат вычитания', result));
 
-    console.log('умножение 6 * 7');
+    console.log('умножение: 6 * 7');
     multiply(6, 7, (result) => console.log('результат умножения', result));
 
-    console.log('деление 13 / 7');
+    console.log('деление: 13 / 7');
     divide(13, 7, (result) => console.log('результат деления', result));
 
-    console.log('остаток от деления 17 % 7');
+    console.log('остаток от деления: 17 % 7');
     mod(17, 7, (result) => console.log('получен остаток от деления', result));
+
+    console.log('квадратный корень из 16');
+    sqrt(16, (result) => console.log('квадратный корень', result));
+
+    console.log('операция МЕНЬШЕ: 5 < 3');
+    less(5, 3, (result) => console.log('результат операции МЕНЬШЕ', result));
+
+    console.log('операция РАВНО: 1 == 1');
+    equal(1, 1, (result) => console.log('результат операции РАВНО', result));
+
+    console.log('операция МЕНЬШЕ ИЛИ РАВНО: 12 <= 19');
+    lessOrEqual(12, 19, (result) => console.log('результат операции МЕНЬШЕ ИЛИ РАВНО', result));
 
 </script>
