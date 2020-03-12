@@ -1,0 +1,89 @@
+Посмотрите код страницы и вывод в консоль браузера.
+
+<script src="shri-async-hw.js"></script>
+
+<script>
+  const { AsyncArray, add, subtract, mod, less, equal } = Homework;
+
+  function sumOddCallbacks(array, cb) {
+    function reduce(arr, i, acc, callback) {
+      less(i, 0, lessResult => {
+        if (lessResult) {
+          callback(acc);
+        } else {
+          arr.get(i, item => {
+            subtract(i, 1, nextIndex => {
+              mod(item, 2, modResult => {
+                equal(modResult, 1, equalResult => {
+                  if (equalResult) {
+                    add(item, acc, addResult => {
+                      reduce(arr, nextIndex, addResult, callback);
+                    });
+                  } else {
+                    reduce(arr, nextIndex, acc, callback);
+                  }
+                });
+              });
+            });
+          });
+        }
+      });
+    }
+    array.length(length => {
+      subtract(length, 1, i => {
+        reduce(array, i, 0, cb);
+      });
+    });
+  }
+
+  const promisify = (fn, ...args) => new Promise(resolve => fn(...args, resolve));
+
+  function sumOddPromises(array, cb) {
+    function reduce(arr, i, acc) {
+      return promisify(less, i, 0).then(x => {
+        if (x) {
+          return acc;
+        } else {
+          const accumulateOddItem = promisify(arr.get, i).then(item => {
+            return promisify(mod, item, 2)
+              .then(modResult => promisify(equal, modResult, 1))
+              .then(equalResult => (equalResult ? promisify(add, acc, item) : acc));
+          });
+          return Promise.all([promisify(subtract, i, 1), accumulateOddItem]).then(([i, acc]) => reduce(arr, i, acc));
+        }
+      });
+    }
+    promisify(array.length)
+      .then(length => promisify(subtract, length, 1))
+      .then(i => reduce(array, i, 0))
+      .then(cb);
+  }
+
+  function sumOddAsyncAwait(array, cb) {
+    async function sumOdd(arr) {
+      let sum = 0;
+      let length = await promisify(arr.length);
+      for (let i = 0; await promisify(less, i, length); i = await promisify(add, i, 1)) {
+        const item = await promisify(arr.get, i);
+        const itemMod2 = await promisify(mod, item, 2);
+        if (await promisify(equal, itemMod2, 1)) {
+          sum = await promisify(add, sum, item);
+        }
+      }
+      return sum;
+    }
+    sumOdd(array).then(cb);
+  }
+
+  function test(initial) {
+    const array = new AsyncArray(initial);
+    const cb = res => console.log("Сумма нечетных элементов массива ", initial, " = ", res);
+    sumOddCallbacks(array, cb);
+    sumOddPromises(array, cb);
+    sumOddAsyncAwait(array, cb);
+  }
+
+  test([221, 2, 22, 2, 1023, 5, 10, 7, 11, 753]);
+  test([2, 4, 6, 8]);
+  test([]);
+</script>
